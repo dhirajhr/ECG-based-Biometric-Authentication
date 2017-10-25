@@ -1,0 +1,110 @@
+using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+using System.Drawing;
+//using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Xml;
+
+namespace FolderProtection
+{
+    public partial class Form1 : Form
+    {
+        string status="";
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+                status = ".{2559a1f2-21d7-11d4-bdaf-00c04f60b9f0}";
+            else if (radioButton2.Checked)
+                status = ".{21EC2020-3AEA-1069-A2DD-08002B30309D}";
+            else if (radioButton3.Checked)
+                status = ".{2559a1f4-21d7-11d4-bdaf-00c04f60b9f0}";
+            else if (radioButton4.Checked)
+                status = ".{645FF040-5081-101B-9F08-00AA002F954E}";
+            else if (radioButton5.Checked)
+                status = ".{2559a1f1-21d7-11d4-bdaf-00c04f60b9f0}";
+            else if (radioButton6.Checked)
+                status = "{7007ACC7-3202-11D1-AAD2-00805FC1270E}";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            { 
+                
+                DirectoryInfo d = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
+                if (folderBrowserDialog1.SelectedPath.LastIndexOf(".") != -1)
+                {
+                    status=getstatus(folderBrowserDialog1.SelectedPath);
+                }
+                string selectedpath = d.Parent.FullName + d.Name;
+                if (selectedpath.LastIndexOf(status) == -1)
+                {
+                    if (checkBox1.Checked)
+                        setpassword(folderBrowserDialog1.SelectedPath);
+                    d.MoveTo(d.Parent.FullName + d.Name + status);
+                    textBox1.Text = folderBrowserDialog1.SelectedPath;
+                    pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\lock.jpg");
+                }
+                else
+                {
+                    bool s=checkpassword();
+                    if (s == false) return;
+                    d.MoveTo(d.Parent.FullName + d.Name.Substring(0, d.Name.LastIndexOf(".")));
+                    textBox1.Text = folderBrowserDialog1.SelectedPath.Substring(0, folderBrowserDialog1.SelectedPath.LastIndexOf("."));
+                    pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\unlock.jpg");
+                }
+            }
+        }
+        private bool checkpassword()
+        {
+            XmlTextReader read = new XmlTextReader(folderBrowserDialog1.SelectedPath + "\\p.xml");
+            if (read == null)
+                return false;
+            else
+            {
+                checkpassword c = new checkpassword();
+                c.pass = read.Value;
+                while (read.Read())
+                    if (read.NodeType == XmlNodeType.Text)
+                    {
+                        if (c.ShowDialog() == DialogResult.OK)
+                        {
+                            read.Close();
+                           
+                        }
+                        return c.status;
+                        
+                     }
+                
+            }
+            
+            
+        }
+        private Boolean setpassword(string path)
+        {
+            password p = new password();
+            p.path = path;
+            p.ShowDialog();
+            return true;
+        }
+        private string getstatus(string stat)
+        {
+            string[] arr=new string[6];
+            arr[0] = ".{2559a1f2-21d7-11d4-bdaf-00c04f60b9f0}";
+            arr[1] = ".{21EC2020-3AEA-1069-A2DD-08002B30309D}";
+            arr[2] = ".{2559a1f4-21d7-11d4-bdaf-00c04f60b9f0}";
+            arr[3] = ".{645FF040-5081-101B-9F08-00AA002F954E}";
+            arr[4] = ".{2559a1f1-21d7-11d4-bdaf-00c04f60b9f0}";
+            arr[5] = "{7007ACC7-3202-11D1-AAD2-00805FC1270E}";
+            for (int i = 0; i < 6; i++)
+                if (stat.LastIndexOf(arr[i]) != -1)
+                    stat = stat.Substring(0, stat.LastIndexOf("."));
+            return stat;
+        }
+
+    }
+}

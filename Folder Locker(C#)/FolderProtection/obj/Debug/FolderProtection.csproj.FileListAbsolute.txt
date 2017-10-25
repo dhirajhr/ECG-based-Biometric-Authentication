@@ -1,0 +1,12 @@
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\bin\Debug\FolderProtection.exe
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\bin\Debug\FolderProtection.pdb
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.checkpassword.resources
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.Form1.resources
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.password.resources
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.Properties.Resources.resources
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.csproj.GenerateResource.Cache
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.exe
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.pdb
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\bin\Debug\Interop.MLApp.dll
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\Interop.MLApp.dll
+C:\Users\Hp1\Desktop\coolcode_src3\FolderProtection\obj\Debug\FolderProtection.csproj.ResolveComReference.cache
